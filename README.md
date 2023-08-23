@@ -1,20 +1,50 @@
-<p align="center">
-  <img src="assets/banner-YOLO.png" align="middle" width = "1000" />
-</p>
+## Hydro Avian Defender Yolo Model
 
-English | [简体中文](README_cn.md)
+## Quick Start
+<details>
+<summary> Install</summary>
 
- <br>
 
- <div>
-    </a>
-    <a href="https://colab.research.google.com/github/meituan/YOLOv6/blob/main/turtorial.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
-     <a href="https://www.kaggle.com/code/housanduo/yolov6"><img src="https://kaggle.com/static/images/open-in-kaggle.svg" alt="Open In Kaggle"></a>
-  </div>
- <br>
+```shell
+git clone https://github.com/fvde/hydro-avian-defender-yolo-model.git
+cd hydro-avian-defender-yolo-model
+pip install -r requirements.txt
+```
+</details>
 
-## YOLOv6
+<details>
+<summary>Inference</summary>
 
+First, download a pretrained model from the YOLOv6 [release](https://github.com/meituan/YOLOv6/releases/tag/0.4.0) or use your trained model to do inference.
+
+You can do this by running
+```shell
+# Standard Model Size
+wget https://github.com/meituan/YOLOv6/releases/download/0.4.0/yolov6s.pt
+# Mobile CPU Model Size
+wget https://github.com/meituan/YOLOv6/releases/download/0.4.0/yolov6lite_s.pt
+```
+
+Now, run inference with `tools/infer.py`
+
+```shell
+# For standard size
+python tools/infer.py --weights yolov6s.pt --source samples/target.jpg / imgdir
+# For mobile CPU Model Size
+python tools/infer.py --weights yolov6lite_s.pt --img 320 320 --source samples/target.jpg / imgdir
+```
+
+For a full example use
+```shell
+# This will find all birds (class 14) with a confidence of 80% and store the results as txt
+# Class | Bounding Box Coordinates | Confidence
+# 14 0.589052 0.475369 0.400327 0.630542 0.941756
+python tools/infer.py --weights yolov6s.pt --source samples/target.jpg --save-txt --classes 14 --conf-thres 0.8
+```
+
+</details>
+
+## Background
 Implementation of paper:
 - [YOLOv6 v3.0: A Full-Scale Reloading](https://arxiv.org/abs/2301.05586) 🔥
 - [YOLOv6: A Single-Stage Object Detection Framework for Industrial Applications](https://arxiv.org/abs/2209.02976)
@@ -23,16 +53,6 @@ Implementation of paper:
   <img src="assets/speed_comparision_v3.png" align="middle" width = "1000" />
 </p>
 
-
-## What's New
-- [2023.04.28] Release [YOLOv6Lite](configs/yolov6_lite/README.md) models on mobile or CPU. ⭐️ [Mobile Benchmark](#Mobile-Benchmark)
-- [2023.03.10] Release [YOLOv6-Face](https://github.com/meituan/YOLOv6/tree/yolov6-face). 🔥 [Performance](https://github.com/meituan/YOLOv6/tree/yolov6-face#performance-on-widerface)
-- [2023.03.02] Update [base models](configs/base/README.md) to version 3.0.
-- [2023.01.06] Release P6 models and enhance the performance of P5 models. ⭐️ [Benchmark](#Benchmark)
-- [2022.11.04] Release [base models](configs/base/README.md) to simplify the training and deployment process.
-- [2022.09.06] Customized quantization methods. 🚀 [Quantization Tutorial](./tools/qat/README.md)
-- [2022.09.05] Release M/L models and update N/T/S models with enhanced performance.
-- [2022.06.23] Release N/T/S models with excellent performance.
 
 ## Benchmark
 | Model                                                        | Size | mAP<sup>val<br/>0.5:0.95 | Speed<sup>T4<br/>trt fp16 b1 <br/>(fps) | Speed<sup>T4<br/>trt fp16 b32 <br/>(fps) | Params<br/><sup> (M) | FLOPs<br/><sup> (G) |
@@ -105,17 +125,7 @@ Implementation of paper:
 
 </details>
 
-## Quick Start
-<details>
-<summary> Install</summary>
 
-
-```shell
-git clone https://github.com/meituan/YOLOv6
-cd YOLOv6
-pip install -r requirements.txt
-```
-</details>
 
 
 
@@ -208,30 +218,6 @@ python tools/eval.py --data data/coco.yaml --batch 32 --weights yolov6s6.pt --ta
 - config-file: specify a config file to define all the eval params, for example: [yolov6n_with_eval_params.py](configs/experiment/yolov6n_with_eval_params.py)
 </details>
 
-
-<details>
-<summary>Inference</summary>
-
-First, download a pretrained model from the YOLOv6 [release](https://github.com/meituan/YOLOv6/releases/tag/0.4.0) or use your trained model to do inference.
-
-Second, run inference with `tools/infer.py`
-
-```shell
-# P5 models
-python tools/infer.py --weights yolov6s.pt --source img.jpg / imgdir / video.mp4
-# P6 models
-python tools/infer.py --weights yolov6s6.pt --img 1280 1280 --source img.jpg / imgdir / video.mp4
-```
-If you want to inference on local camera or  web camera, you can run:
-```shell
-# P5 models
-python tools/infer.py --weights yolov6s.pt --webcam --webcam-addr 0
-# P6 models
-python tools/infer.py --weights yolov6s6.pt --img 1280 1280 --webcam --webcam-addr 0
-```
-`webcam-addr` can be local camera number id or rtsp address.
-</details>
-
 <details>
 <summary> Deployment</summary>
 
@@ -279,10 +265,3 @@ python tools/infer.py --weights yolov6s6.pt --img 1280 1280 --webcam --webcam-ad
  * Blog post: [YOLOv6 Object Detection – Paper Explanation and Inference](https://learnopencv.com/yolov6-object-detection/)
 
    </details>
-
-### [FAQ（Continuously updated）](https://github.com/meituan/YOLOv6/wiki/FAQ%EF%BC%88Continuously-updated%EF%BC%89)
-
-If you have any questions, welcome to join our WeChat group to discuss and exchange.
-<p align="center">
-  <img src="assets/wechat_qrcode.png" align="middle" width = "1000" />
-</p>
