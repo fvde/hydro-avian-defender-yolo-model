@@ -39,6 +39,7 @@ For a full example use
 # This will find all birds (class 14) with a confidence of 80% and store the results as txt
 # Class | Bounding Box Coordinates | Confidence
 # 14 0.589052 0.475369 0.400327 0.630542 0.941756
+# All supported classes can be found at data/coco.yaml (note that the usage is zero indexed!)
 python tools/infer.py --weights yolov6s.pt --source samples/target.jpg --save-txt --classes 14 --conf-thres 0.8
 ```
 
