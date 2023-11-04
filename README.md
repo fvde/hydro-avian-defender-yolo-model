@@ -2,6 +2,20 @@
 
 ## Quick Start
 <details>
+
+<summary> Ultralytics </summary>
+
+We are now using ultralytics for everything!
+https://docs.ultralytics.com/modes/predict/#inference-arguments
+
+```shell
+yolo detect predict model=yolov8n.pt source=<path_to_image> save=True, imgsz=640, conf=0.5 save_txt=True classes=14
+
+# How to make torchvision work
+pip uninstall torch torchvision
+pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
+```
+
 <summary> Install</summary>
 
 
