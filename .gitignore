@@ -113,10 +113,9 @@ venv.bak/
 #vscode
 .vscode/*
 
-#user scripts
-*.sh
-
 # model files
 *.onnx
 *.pt
 *.engine
+
+latest.jpg

@@ -9,6 +9,9 @@ We are now using ultralytics for everything!
 https://docs.ultralytics.com/modes/predict/#inference-arguments
 
 ```shell
+# Install the ultralytics package from PyPI
+pip install ultralytics
+
 yolo detect predict model=yolov8n.pt source=<path_to_image> save=True, imgsz=640, conf=0.5 save_txt=True classes=14
 
 # How to make torchvision work
