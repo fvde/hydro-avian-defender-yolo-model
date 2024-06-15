@@ -2,6 +2,10 @@
 
 # sh local_predict.sh 1280 1280
 
+## How to install on Pi
+# - pip install --break-system-packages ultralytics
+# sudo apt-get install libca
+
 ## How to Get Results
 ## scp -r pi@192.168.178.48:/home/pi/results/ .  
 
@@ -13,7 +17,7 @@ PATH=/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
 width=${1}
 height=${2}
 confidence=0.5
-classes=14 # Birds
+classes=14 # Birds # 41 = Cup # 0 = Person # 44 = Spoon
 file_name="latest.jpg"
 label_file_name="latest.txt"
 # target_dir=/home/pi/results/$(date +%F-%H:%M)/
